@@ -170,3 +170,7 @@ button, input {
 	font-weight: bold;
 	font-size:15px;
 }
+
+.sorry {
+	color: yellow;
+}
