@@ -29,7 +29,7 @@
     FB.api('/me/feed', 'post', {access_token:accessToken, message:mes}, function(response) {
       if (response.error) {
         if (response.error.code === 506) {
-          alert('Duplicate status update. Please try posting something different.");
+          alert('Duplicate status update. Please try posting something different.');
         }
         else {
           alert('Please give permissions to post. Please try again!');
