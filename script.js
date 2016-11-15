@@ -37,61 +37,6 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
-  var accessToken = function getAccessToken(){
-    FB.getLoginStatus(function(response){
-      if (response.status === 'connected') {
-        accessToken = response.authResponse.accessToken;
-      }
-      else {
-        FB.login();
-      }
-    });
-  };
-
-  function postNewFeed() {
-    FB.api('/me/feed', 'post', {access_token: accessToken, message:"I am a new post!"}, function(response) {
-      if (response.error) {
-        FB.login(function(response) {
-          console.log("updated access token");
-        }, {scope:'publish_actions'});
-        postNewFeed();
-      }
-    });
-  }
-
-  function commentFeed() {
-    FB.api('/me/feed', 'get', function(response) {
-      if (response.error) {
-        FB.login(function(response) {
-          console.log("updated access token");
-        }, {scope:'user_posts'});
-        commentFeed();
-      }
-      else {
-        var feedID = response.data[0].id + "/comments";
-        FB.api(feedID, 'post', {access_token: accessToken, message: "I am a comment to a post"});
-      } 
-    });
-  }
-
-  function commentToComment() {
-    FB.api('/me/feed', 'get', {fields:'comments'}, function(response) {
-      if (response.error) {
-        FB.login(function(response) {
-          console.log("updated access token");
-        }, {scope:'user_posts'});
-        commentToComment();
-      }
-      else {
-        var commentID = response.data[0].comments.data[0].id;
-        var commentIDString = commentID + "/comments";
-        FB.api(commentIDString, 'post', {access_token: accessToken, message:"I am a comment to a comment", parent: commentID});
-      }
-    })
-  }
-
-
-
 
 
 
