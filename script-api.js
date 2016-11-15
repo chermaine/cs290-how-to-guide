@@ -23,11 +23,6 @@
   function postNewFeed() {
     var mes = document.getElementById('new-feed').value;
     var accessToken = checkLoginStatus();
-    if (accessToken === '') {
-      alert('Please login to continue');
-      flag = updateAccessToken('publish_actions');
-      accessToken = checkLoginStatus();
-    }
     FB.api('/me/feed', 'post', {access_token:accessToken, message:mes}, function(response) {
       if (response.error) {
         if (response.error.code === 506) {
