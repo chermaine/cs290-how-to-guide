@@ -7,15 +7,11 @@
       }
       else {
         alert('Please login to continue');
-        while (flag>0) {
-          FB.login(function(res) {
+        FB.login(function(res) {
            accessToken= res.authResponse.accessToken;
-          });
-          flag = 0;
-        }
+        });
       }
     });
-    flag = 1;
     return accessToken;
   }
 
@@ -32,7 +28,7 @@
     var accessToken = checkLoginStatus();
     FB.api('/me/feed', 'post', {access_token:accessToken, message:mes}, function(response) {
       if (response.error) {
-        alert('Please give permission to post and try again!');
+        alert('Error occured. Please try again!');
         while (flag > 0) {
           flag = updateAccessToken('publish_actions');
         }
