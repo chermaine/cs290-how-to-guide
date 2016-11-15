@@ -28,10 +28,14 @@
     var accessToken = checkLoginStatus();
     FB.api('/me/feed', 'post', {access_token:accessToken, message:mes}, function(response) {
       if (response.error) {
-        alert('Error occured. Please try again!');
-        console.log(response);
-        while (flag > 0) {
-          flag = updateAccessToken('publish_actions');
+        if (response.error.code === 506) {
+          alert('Duplicate status update. Please try posting something different.");
+        }
+        else {
+          alert('Please give permissions to post. Please try again!');
+          while (flag > 0) {
+            flag = updateAccessToken('publish_actions');
+          }
         }
       }
       else {
