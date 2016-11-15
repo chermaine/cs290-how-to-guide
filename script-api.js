@@ -6,11 +6,16 @@
         accessToken= response.authResponse.accessToken;
       }
       else {
-        FB.login(function(res) {
-        accessToken= res.authResponse.accessToken;
-        });
+        alert('Please login to continue');
+        while (flag>0) {
+          FB.login(function(res) {
+           accessToken= res.authResponse.accessToken;
+          });
+          flag = 0;
+        }
       }
     });
+    flag = 1;
     return accessToken;
   }
 
