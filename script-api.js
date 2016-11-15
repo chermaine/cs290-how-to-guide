@@ -29,6 +29,7 @@
     FB.api('/me/feed', 'post', {access_token:accessToken, message:mes}, function(response) {
       if (response.error) {
         alert('Error occured. Please try again!');
+        console.log(response);
         while (flag > 0) {
           flag = updateAccessToken('publish_actions');
         }
