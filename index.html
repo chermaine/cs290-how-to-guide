@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset = "UTF-8">
+    <title>Learning Facebook API</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+  	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  </head>
+  
+  <body>
+  	<script src="script.js"></script>
+    <div id="home">
+    	<div class="navi-menu">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#get-started">Getting Started</a></li>
+            <li><a href="#fb-tools">Tools</a></li>
+            <li><a href="#graph-api">Graph API </a></li>
+            <li><a href="#the-end">The End </a></li>
+          </ul>
+      	</div>
+      	<div>
+      		<h1>Learning Facebook API</h1>
+      		<h4>WRITTEN BY CHERMAINE CHEANG</h4>
+      	</div>
+    </div>
+
+    <div id="introduction">
+    	<div>
+	    	<h1> Introduction </h1>
+	    	<p> Welcome to learning how to use Facebook API guide. In this guide, you will learn how to incorporate popular Facebook features into your own websites. This guide will first focus on implementing Facebook Javascript SDK to integrate direct Facebook login or sign-up, sharing, posting and commenting directly from your webpage. Then, we will learn about using Facebook's Graph API to get data in and out of Facebook without using those tools provided by Facebook SDK. Before we get started, please note that this is an entry level API guide, and it assumes that you have some knowlegde working with HTML, CSS and Javascript. </p>
+	    </div>
+    	<div class="buttons">
+    		<a href="#get-started" id="start">Let's get started!</a>
+    	</div>
+    </div>
+
+    <div id="get-started">
+    	<div>
+	    	<h1>Getting Started</h1>
+	    	<p>In order to use Facebook API on your own webpage, you need to obtain a unique App ID for your application. You can easily accomplished this by following the steps below:
+	    	</p>
+	    	<ol id="appID-steps">
+	    		<li>Login into your Facebook</li>
+	    		<li>Create a Developer Account</li>
+	    		<li>At your dashboard, select "Add a New App"</li>
+	    		<li>Enter the information required
+	    			<br>
+	    			<img src="./images/newApp.png" alt="Create New App ID">
+	    			<br> 
+	    			Select "Apps for Pages" for category. Once you are done, select "Create App ID".
+	    		</li>
+	    		<li>Now you have an app ID which can be found under "Dashboard"
+	    			<br>
+	    			<img src="./images/appID.png" alt="Locate App ID">
+	    		</li>
+	    		<li>Choose a Platform your app will work on
+	    			<br>
+	    			<img src="./images/platform.png" alt="Choosing Platform">
+	    			<br>
+	    			For our case, we will be using the "website" platform.
+	    		</li>
+	    		<li>Setup Facebook SDK for JavaScript by pasting the following code directly after the opening body tag of the HTML where you want to use SDK
+	    			<br>
+	    			<img src="./images/fb-sdk.png" alt="Facebook Javascript SDK">
+	    		</li>
+	    	</ol>
+	    	<p>For more information visit <a href="https://developers.facebook.com/docs/apps/register">https://developers.facebook.com/docs/apps/register</a>
+	    	</p>
+	    	<p>**Important notes: You must have a working url or app domain in order for Facebook Javascript to work on your website. That means, your website must be hosted on some server.</p>
+	    </div>
+    	<div class="buttons">
+    		<a href="#fb-tools" class="next">Next --></a>
+    	</div>
+    </div>
+
+    <div id="fb-tools">
+    	<div class="login">
+    		<h1>Facebook Login</h1>
+    		<p>Facebook Login for Apps is a very popular tool that has been incorporated in many applications, pages and softwares. The main reason developers are using these features is that it provides a fast and hassle free way for their users to use their applications without having to remember multiple usernames and passwords. In addition, since almost everyone in this world has a Facebook account, providing users with a familiar login process will promote user friendliness of the application. Hence, we will look at the easiest ways of using this powerful tool in our webpages. </p>
+    		<ol>
+    			<li>
+    				Check Login Status
+    				<p>
+    				FB.getLoginStatus() is a built-in function provided by Facebook Javascript SDK that allows developers to determine current status of a user when they first enter your website. A user's status can be either <b>connected, not_authorized, </b> or <b>unknown</b>. Here is an example code:</p>
+    				<img src="./images/getLoginStatus.png" alt="Check Login Status">
+    				<p>This function will return an response object which look like this:</p>
+    				<img src="./images/response.png" alt="Object returned from FB.getLoginStatus()">
+    				<ul>
+    					<li>Status - shows current user state
+    						<ul>
+    							<li>connected - user is logged into Facebook</li>
+    							<li>not_authorized - user is logged into Facebook, but did not give permission for your app</li>
+    							<li>unknown - user is not logged into Facebook or logged out of your app</li>
+    						</ul>
+    					</li>
+    					<li>authResponse - provide us with information like userID and accessToken. If authResponse is not present, then user is either not logged into Facebook or did not authorized your app.  
+    					</li>
+    				</ul>
+    			</li>
+    			<li>
+    				If the user is not logged into Facebook, you can either provide a login button on your page to allow them to login, or you can have a popup window that will handle the login process. 
+    				<p>
+    				a. To add a login button on your web, simply visit this <a href="https://developers.facebook.com/docs/facebook-login/web/login-button">page</a> to configurate your button. Once you are happy with the size of your button and the basic features of your button, click on "Get Code" and you will be provided with the code needed to implement that button in your html. Simply add the code into your HTML where you want the login button to appear. Here is an example of the code: </p>
+    				<img src="./images/button.png" alt="Codes for Login Button">
+    				<p>b. To invoke a popup Login Dialog, simply use the function <b>FB.login()</b></p>
+    			</li>
+    			<li>Making API Calls
+    			<p>Once the user is logged in and authenticated, you can make API calls using FB.api() on behalf of the user from their browser.</p>
+    			</li>
+    			<li>Log out
+    				<p>Log out can be easily handle using <b>FB.logout()</b> function. If you implemented login using a login button, you can set "auto-logout-link" to true, to automatically provide a logout button once users are logged in.</p>
+    			</li>
+    		</ol>
+    		<p>An example of working codes is shown below
+    		<img src="./images/login-code.png" alt="Example codes for Facebook Login">
+    		</p>
+    		<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div>
+    		<p>For more reference, visit <a href="https://developers.facebook.com/docs/facebook-login/web#confirm">https://developers.facebook.com/docs/facebook-login/web#confirm</a></p>
+    	</div>
+    	<div class="plugins">
+    		<h1>Social Plugins</h1>
+    		<p>Facebook provides an easy way for developers to incorporate their popular plugins (like, share, send, comment, save and follow buttons). All we need to incorporate these plugins on our websites are just to configurate them and add them to our HTML, very much like adding a login button. <a href="https://developers.facebook.com/docs/plugins">Facebook Social Plugins</a> site have all the configuration tools we need to implement all these buttons.</p>
+    		<div class="fb-like" data-href="https://chermaine.github.io/facebookAPI-guide" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+    		<div class="fb-save" data-uri="https://chermaine.github.io/facebookAPI-guide/" data-size="large"></div>
+    		<div class="fb-share-button" data-href="https://chermaine.github.io/facebookAPI-guide" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fchermaine.github.io%2FfacebookAPI-guide&amp;src=sdkpreparse">Share</a></div>
+    	</div>
+    	<div class="buttons">
+    		<a href="#graph-api" class="next">Next --></a>
+    	</div>
+    </div>
+
+    <div class="graph-api" id="graph-api">
+    	<div>
+	    	<h1>Graph API</h1>
+	    	<p>Graph API is the primary ways for developers to write and read data on Facebook on behalf of their users. Graph API sends HTTP requests to http://graph.facebook.com accomplish many tasks. For example, developers can use the POST method to post the some content on their user's wall. In addition, Graph API can use the GET method to get information like feeds, albums and comments of their current user. In order to use this API, developers need to have an access token from their current user, and this can be easily obtained by having users login to our apps.</p>
+	    	<p>Access token is generated when a user logged into Facebook from a source outside of Facebook. This token is what provides developers a temporary and secure access to Facebook APIs. Access token is similar to an App ID in a way that it is unique for each user.  However, access token does has an expiration unlike App ID. When an access token expired, developers can ask for a new access token by asking the user to login again. </p> 
+    	</div>
+    	<div>
+    		<h2>Getting Access Token</h2>
+	    	<ul class="unordered-list">
+	    		<li>Check user's status using FB.getLoginStatus and get user's access token once user's is connected
+	    			<p>If user is not logged into Facebook, have user login using a login button or FB.login. If user is logged into Facebook, but did not authorized our app, have user authorizes our app.</p>
+	    			<p>Once user is logged in and authenticated our app, the response object returned from FB.getLoginStatus will contain the access token we need.</p>
+	    			<img src="./images/accessToken.png" alt="Code to get Access Token">
+	    		</li>
+	    		<li>FB.getAuthResponse() is another way we can get access token easily. This is mainly used when we assume that the user is connected. The function return an object that has a property named access token. E.g code - <em>FB.getAuthResponse()['accessToken']</em> will print current access token on the console</li>
+	    	</ul>
+    	</div>
+
+    	<div>
+    		<h2>Making Graph API Request</h2>
+    		<p>Once we have the user's access token, we can start making Graph API requests using FB.api(). FB.api() is another built-in method in Facebook Javascript SDK. It can accepts upto four parameters as shown below:</p>
+    		<img src="./images/fb-api().png" alt="FB.api() method">
+    		<ul class="unordered-list">
+    			<li>*Path - the endpoint path that you want to call, e.g. '/me' is a path to current user's profile. </li>
+    			<li>Method - the HTTP method (GET, POST, or DELETE) that you want to use for the API request. GET is the default method if none specified</li>
+    			<li>Params - an object consisting of any parameters that you want to pass into your Graph API call, e.g. {fields = 'first_name, id'} </li>
+    			<li>Callback - the function to handle the response returned from the request you sent </li>
+    		</ul>
+    		<p><em>* indicated required field </em></p>
+    	</div>
+    	<div>
+    		<h2>GET Request</h2>
+    		<p>	First, we will talk about making GET requests to read data. Data returned from a GET request is an JSON object with number of key-value pairs depending on the data you requested. We can then use these information to accomplish tasks we wish to accomplish. Let's take a look at some examples:
+    		</p>
+    		<ul class="unordered-list">
+    			<li>Getting user's public profile
+    				<p>We can get user's public profile by sending a GET request to http://graph.facebook.com using FB.api() as shown below.
+    				</p>
+    				<img src="./images/get-user.png" alt="GET Request for User's Profile">
+    				<ul class="unordered-list">
+    					<li>path = '/me'</li>
+    					<li>method = 'get'</li>
+    					<li>params = {fields:'first_name, last_name, picture'}</li>
+    					<li>callback = function(response){console.log(response)}</li>
+    				</ul>
+    				<img src="./images/get-user-response-json.png" alt="Object returned from GET request">
+    				<p>The response object returned to console will look like the above. It will contain information we specified in params. When we expanded the object, we will see the details of the object as below </p>
+    				<img src="./images/get-user-response.png" alt="Object returned from GET request">
+    			</li>
+    			<li>Getting user's email and user's friends list
+    				<p>In addition to user's public profile, we can also get user's email and a list of user's friends who also use our app. However, in order to do so, we need to an access token that allow us to access these information. Hence, we need to ask for user's permission before we can access these information. To obtain permission, we can add addition scopes during our call to FB.login(). An example is shown below: </p>
+    				<img src="./images/login-scope.png" alt="FB.login() with scope">
+    				<p>After getting an updated access token, we can proceed to get these information using the FB.api in similar fashion as getting user's public profile. </p>
+    				<img src="./images/get-email-friends.png" alt="GET request for user's email and friends list">
+    				<p>The result is shown below:</p>
+    				<img src="./images/get-email-friends-json.png" alt="Object returned from GET request">
+    			</li>
+    		</ul>
+    		<p>By using GET request, we can obtain many other informations such as user' likes, user's comments, user's albums, user's feed, etc. A complete list can be found <a href="https://developers.facebook.com/docs/graph-api/reference">here</a>. However, in order to get access to these data, we again need user's permission which requires that our app be reviewed through the process provided by <a href="https://developers.facebook.com/docs/facebook-login/permissions/review#reference-friends">Facebook Login Review</a> Hence, going forward, all Graph API requests will be performed assuming that you have your application reviewed.  
+    		</p>
+    	</div>
+    	<div>
+    		<h2>POST Request</h2>
+    		<p>POST requests allow us to write data on behalf of our users to Facebook. For example, we can create a new post to user's feed, add comments to user's pictures or feeds, send a message through Facebook Messenger, etc. In order to perform these tasks, we need to update user's permission accordingly. Let's take a look at some examples:</p>
+    		<ul class="unordered-list">
+    			<li>Creating a new feed
+    				<p>To access user's feed, we need to have user's permission for 'user_posts'. To accomplish this, simply invoke FB.login() with user_posts as the scope. The following code will create a new feed on your wall:</p>
+    				<img src="./images/new-post.png" alt="POST request for new feed">
+    				<ul class="unordered-list">
+    					<li>Path = '/me/feed'</li>
+    					<li>Method = POST request </li>
+    					<li>Params = access token (obtained from Graph API Explored), and message we wanted to post</li>
+    				</ul>
+    				<p>Once this line of code runs, we will see the following post on our wall.</p>
+    				<img src="./images/new-post-result.png" class="fb-results" alt="Result of POST request">
+    				<div class="post-button">
+                        <input type="text" id="new-feed" value="I am a new post!"></input>
+                        <button type="button" onclick="postNewFeed();">Click to Post</button>
+                    </div>
+    			</li>
+    			<li>Commenting on the feed we just posted
+    				<p>Now to add a comment on the feed we just posted, we first need to get the feed's ID. We can do this by sending a GET request to get a list of feeds of our current user like so </p>
+    				<img src="./images/get-feed.png" alt="POST request for commenting on a feed">
+    				<p>In order for the above code to work, we again need to update our access token to include permission for user_posts. Once we have the updated access token, we will get an JSON object with a list of data containing information about our user's news feed. An example is shown below: </p>
+    				<img src="./images/user-feeds-1.png" alt="Object returned from GET request">
+    				<img src="./images/user-feeds-2.png" alt="Object returned from GET request">
+    				<p>We can then get the feed's id we want by storing it to a variable.</p>
+    				<img src="./images/feed-id.png" alt="Getting feed's ID">
+    				<p>Since data is an array and we want the most recent post from our list, we use data[0] to access the feed's id. Once we have the feed's ID, we can add a comment to the post by sending a POST request. </p>
+    				<img src="./images/comment-feed.png" alt="POST request for commenting on a feed">
+    				<p>And the results is shown below:</p>
+    				<img src="./images/comment-post-result.png" class="fb-results" alt="Result from POST request">
+    				<div class="post-button">
+                        <input type="text" id="feed-comment" value="I am a comment to a post"></input>
+                        <button type="button" onclick="commentFeed();">Click to Comment</button>
+                    </div>
+    				<p>We can also add a comment to a comment by sending the same POST request but using comment's id instead of feed's id. We also need to set the parent component of this new comment to the comment's id we are adding the comment. Here's is an example: </p>
+    				<img src="./images/comment-comment-code.png" alt="POST request to commenting on comment">
+    				<p>And here is the result</p>
+    				<img src="./images/comment-comment-result.png" class="fb-results" alt="Result from POST request">
+    				<div class="post-button">
+                        <input type="text" id="comment-comment" value="I am a comment to a comment"></input>
+                        <button type="button" onclick="commentFeed();">Click to Comment</button>
+                    </div>
+    			</li>
+    		</ul>
+    	</div>
+    	<div>
+    		<h2>Getting it All Together</h2>
+    		<p>An working example that will create the resulting post</p>
+    		<img src="./images/graph-api-1.png" alt="Final codes part 1">
+    		<img src="./images/graph-api-2.png" alt="Final codes part 2">
+            <img src="./images/graph-api-3.png" alt="Final codes part 3">
+    		<p>Results: </p>
+    		<img src="./images/graphAPI-result.png" class="fb-results" alt="Results">
+    	</div>
+    	<div>
+    		<p>For more information about Graph API visit <a href="https://developers.facebook.com/docs/graph-api">https://developers.facebook.com/docs/graph-api</a>.</p>
+    	</div>
+    	<div class="buttons">
+    		<a href="#the-end" class="next">Next --></a>
+    	</div>
+    </div>
+
+    <div id="the-end">
+    	<h1>The End</h1>
+    	<p>Thank you so much for using this guide. Hopefully, I was able to provide you with an introduction to Facebook API and all the neccessary information you needed.</p>
+    	<h2>References:</h2>
+		<ul class="unordered-list">
+			<li><a href="https://developers.facebook.com/docs/web">https://developers.facebook.com/docs/web</a></li>
+			<li><a href="https://developers.facebook.com/docs/facebook-login/permissions">https://developers.facebook.com/docs/facebook-login/permissions</a></li>
+			<li><a href="https://developers.facebook.com/docs/graph-api">https://developers.facebook.com/docs/graph-api</a></li>
+			<li><a href="https://developers.facebook.com/docs/plugins">https://developers.facebook.com/docs/plugins</a></li>
+		</ul>
+    </div>
+    <script type="script-api.js"></script>
+  </body>
+</html>
