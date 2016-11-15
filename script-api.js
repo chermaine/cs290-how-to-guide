@@ -1,5 +1,4 @@
 
-<script>
   function checkLoginStatus() {
     var accessToken;
     FB.getLoginStatus(function (response) {
@@ -93,5 +92,5 @@
       }
     });
   }
-</script>
+
 
