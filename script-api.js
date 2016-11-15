@@ -23,13 +23,18 @@
   function postNewFeed() {
     var mes = document.getElementById('new-feed').value;
     var accessToken = checkLoginStatus();
+    if (accessToken === '') {
+      alert('Please login to continue');
+      flag = updateAccessToken('publish_actions');
+      accessToken = checkLoginStatus();
+    }
     FB.api('/me/feed', 'post', {access_token:accessToken, message:mes}, function(response) {
       if (response.error) {
         if (response.error.code === 506) {
           alert('Duplicate status update. Please try posting something different.');
         }
         else {
-          alert('Please give permissions to post. Please try again!');
+          alert('Please give permission to post on your wall and try again!');
           while (flag > 0) {
             flag = updateAccessToken('publish_actions');
           }
