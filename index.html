@@ -219,12 +219,13 @@
     					<li>Method = POST request </li>
     					<li>Params = access token (obtained from Graph API Explored), and message we wanted to post</li>
     				</ul>
+					<p>Here's the resulting post:</p>
+					<img src="./images/new-post-result.png" class="fb-results" alt="Result of POST request">
     				<div class="post-button">
                         <input type="text" id="new-feed" value="I am a new post!">
                         <button type="button" onclick="postNewFeed();">Post to Facebook</button>
-						<p class="sorry">Unfortunately, because my 'example' app has not been reviewed by Facebook, you will not see any post on your wall. However, the sample result is shown below.</p>
                     </div>
-					<img src="./images/new-post-result.png" class="fb-results" alt="Result of POST request">
+					<p class="sorry">Unfortunately, because my 'example' app has not been reviewed by Facebook, you will not see any post on your wall. However, the sample result is shown above.</p>
     			</li>
     			<li>Commenting on the feed we just posted
     				<p>Now to add a comment on the feed we just posted, we first need to get the feed's ID. We can do this by sending a GET request to get a list of feeds of our current user like so </p>
@@ -237,20 +238,21 @@
     				<p>Since data is an array and we want the most recent post from our list, we use data[0] to access the feed's id. Once we have the feed's ID, we can add a comment to the post by sending a POST request. </p>
     				<img src="./images/comment-feed.png" alt="POST request for commenting on a feed">
     				<p>And the results is shown below:</p>
+					<img src="./images/comment-post-result.png" class="fb-results" alt="Result from POST request">
     				<div class="post-button">
                         <input type="text" id="feed-comment" value="I am a comment to a post">
                         <button type="button" onclick="commentFeed();">Comment to Facebook</button>
-						<p class="sorry">Unfortunately, because my 'example' app has not been reviewed by Facebook, you will not see any post on your wall. However, the sample result is shown below.</p>
                     </div>
-					<img src="./images/comment-post-result.png" class="fb-results" alt="Result from POST request">
+					<p class="sorry">Unfortunately, because my 'example' app has not been reviewed by Facebook, you will not see any post on your wall. However, the sample result is shown above.</p>
     				<p>We can also add a comment to a comment by sending the same POST request but using comment's id instead of feed's id. We also need to set the parent component of this new comment to the comment's id we are adding the comment. Here's is an example: </p>
     				<img src="./images/comment-comment-code.png" alt="POST request to commenting on comment">
+					<p>Here's the resulting post: </p>
+					<img src="./images/comment-comment-result.png" class="fb-results" alt="Result from POST request">
     				<div class="post-button">
                     	<input type="text" id="comment-comment" value="I am a comment to a comment">
                   		<button type="button" onclick="commentToComment();">Comment to Facebook</button>
-						<p class="sorry">Unfortunately, because my 'example' app has not been reviewed by Facebook, you will not see any post on your wall. However, the sample result is shown below.</p>
                     </div>
-    				<img src="./images/comment-comment-result.png" class="fb-results" alt="Result from POST request">
+					<p class="sorry">Unfortunately, because my 'example' app has not been reviewed by Facebook, you will not see any post on your wall. However, the sample result is shown above.</p>
     			</li>
     		</ul>
     	</div>
